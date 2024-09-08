@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "7a1b76a2-0b6e-4868-a946-3645914c40c7",
+		"name": "Microservices-JavaT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1OrderService",
+			"item": [
+				{
+					"name": "bookOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderDto\": {\n        \"id\": 101,\n        \"name\": \"Shivanshu\",\n        \"quantity\": 5,\n        \"price\": \"100\"\n    },\n    \"paymentDTO\": {}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9192/order/bookOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9192",
+							"path": [
+								"order",
+								"bookOrder"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "2PaymentService",
+			"item": [
+				{
+					"name": "doPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"paymentStatus\" : \"success\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9191/payment/doPayment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9191",
+							"path": [
+								"payment",
+								"doPayment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
