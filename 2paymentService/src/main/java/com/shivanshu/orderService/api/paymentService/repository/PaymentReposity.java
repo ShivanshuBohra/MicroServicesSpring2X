@@ -6,4 +6,6 @@ import com.shivanshu.orderService.api.paymentService.entity.Payment;
 
 public interface PaymentReposity extends JpaRepository<Payment, Integer>{
 
+	Payment findByOrderId(int orderId);
+
 }
