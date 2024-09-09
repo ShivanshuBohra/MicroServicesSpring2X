@@ -17,6 +17,9 @@ public class OrderService {
 	@Autowired
 	OrderRepository orderRepository;
 	
+	@Autowired
+	RestTemplate restTemplate;
+	
 
 	
 	public TransactionResponseDto saveOrder(TransactionRequestDto request) {
@@ -25,8 +28,11 @@ public class OrderService {
 		PaymentDTO paymentDto = request.getPaymentDTO();
 		paymentDto.setOrderId(orderDto.getId());
 		paymentDto.setAmount(orderDto.getPrice());
-		PaymentDTO paymentResponse =  new RestTemplate().postForObject("http://localhost:9191/payment/doPayment", paymentDto, PaymentDTO.class);
 		
+		//PaymentDTO paymentResponse =  restTemplate.postForObject("http://localhost:9191/payment/doPayment", paymentDto, PaymentDTO.class);
+		//as PAYMENT-SERVICE is registered with eureka server no need to give host and port , give application name only
+		PaymentDTO paymentResponse =  restTemplate.postForObject("http://PAYMENT-SERVICE/payment/doPayment", paymentDto, PaymentDTO.class);
+
 		responseMessage = paymentResponse.getPaymentStatus().equals("success")?"payment process successful":"payment failed";
 		
 		return new TransactionResponseDto(orderDto, paymentResponse.getAmount(), paymentResponse.getTransactionId(), responseMessage);
